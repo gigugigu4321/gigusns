@@ -5,6 +5,10 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vue from 'vue'
+import router from './router'
+import http from './service/http.js'
+
 require('./bootstrap');
 
 /**
@@ -13,8 +17,11 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-
 const app = new Vue({
-    el: '#app'
-});
+  router,
+  el: '#app',
+  created (){
+    http.init()
+  },
+  render: h => h(require('./app.vue')),
+}).$mount('#app');

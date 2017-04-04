@@ -8,8 +8,8 @@ window._ = require('lodash');
  */
 
 window.$ = window.jQuery = require('jquery');
-
-require('bootstrap-sass');
+window.Tether = require('tether')
+require('bootstrap');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -19,17 +19,6 @@ require('bootstrap-sass');
 
 window.Vue = require('vue');
 
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-window.axios = require('axios');
-
-window.axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest'
-};
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

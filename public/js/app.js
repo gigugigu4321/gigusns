@@ -21687,7 +21687,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
 
 /* harmony default export */ __webpack_exports__["a"] = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
   mode: 'history',
-  routes: [{ path: '/', component: __webpack_require__(12) }, { path: '/signin', component: __webpack_require__(11) }, { path: '/signup', component: __webpack_require__(12) }, { path: '/example', component: __webpack_require__(44) }],
+  routes: [{ path: '/', component: __webpack_require__(12) }, { path: '/signin', component: __webpack_require__(11) }, { path: '/signup', component: __webpack_require__(59) }, { path: '/example', component: __webpack_require__(44) }],
   scrollBehavior: function scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
@@ -44566,10 +44566,10 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('nav', {
     staticClass: "navbar navbar-toggleable-md navbar-light bg-faded"
-  }, [_vm._m(0), _vm._v(" "), _c('a', {
+  }, [_vm._m(0), _vm._v(" "), _c('router-link', {
     staticClass: "navbar-brand",
     attrs: {
-      "href": "#"
+      "to": "/"
     }
   }, [_vm._v("TOP Page")]), _vm._v(" "), _c('div', {
     staticClass: "collapse navbar-collapse",
@@ -44584,7 +44584,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "to": "/signin"
     }
-  }, [_vm._v("Signin")])], 1), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _vm._m(2)])])
+  }, [_vm._v("Signin")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "nav-item"
+  }, [_c('router-link', {
+    attrs: {
+      "to": "/signup"
+    }
+  }, [_vm._v("Signup")])], 1)]), _vm._v(" "), _vm._m(1)])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('button', {
     staticClass: "navbar-toggler navbar-toggler-right",
@@ -44599,15 +44605,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('span', {
     staticClass: "navbar-toggler-icon"
   })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
-    staticClass: "nav-item"
-  }, [_c('a', {
-    staticClass: "nav-link",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Signup")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('form', {
     staticClass: "form-inline my-2 my-lg-0"
@@ -47010,6 +47007,113 @@ module.exports = function(module) {
 __webpack_require__(14);
 module.exports = __webpack_require__(15);
 
+
+/***/ }),
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  null,
+  /* template */
+  __webpack_require__(60),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/vagrant/Code/gigusns/resources/assets/js/components/Signup.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Signup.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-31eaf0e8", Component.options)
+  } else {
+    hotAPI.reload("data-v-31eaf0e8", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container"
+  }, [_c('form', {
+    staticClass: "form-signin"
+  }, [_c('h2', {
+    staticClass: "form-signin-heading"
+  }, [_vm._v("Please sign up")]), _vm._v(" "), _c('label', {
+    staticClass: "sr-only",
+    attrs: {
+      "for": "inputAccountID"
+    }
+  }, [_vm._v("アカウントID")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "email",
+      "id": "inputAccountID",
+      "placeholder": "account ID",
+      "required": "",
+      "autofocus": ""
+    }
+  }), _vm._v(" "), _c('label', {
+    staticClass: "sr-only",
+    attrs: {
+      "for": "inputEmail"
+    }
+  }, [_vm._v("Email address")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "email",
+      "id": "inputEmail",
+      "placeholder": "Email address",
+      "required": ""
+    }
+  }), _vm._v(" "), _c('label', {
+    staticClass: "sr-only",
+    attrs: {
+      "for": "inputPassword"
+    }
+  }, [_vm._v("Password")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "password",
+      "id": "inputPassword",
+      "placeholder": "Password",
+      "required": ""
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "checkbox"
+  }), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-lg btn-primary btn-block",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("Sign in")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-31eaf0e8", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

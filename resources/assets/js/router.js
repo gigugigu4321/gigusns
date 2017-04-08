@@ -8,7 +8,7 @@ export default new VueRouter({
   routes: [
     { path: '/'        , component: require('./components/TopPage.vue')},
     { path: '/signin'  , component: require('./components/Signin.vue')},
-    { path: '/signup'  , component: require('./components/TopPage.vue')},
+    { path: '/signup'  , component: require('./components/Signup.vue')},
     { path: '/example' , component: require('./components/Example.vue')},
   ],
   scrollBehavior (to, from, savedPosition) {

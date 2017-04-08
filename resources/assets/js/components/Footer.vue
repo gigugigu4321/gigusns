@@ -2,7 +2,7 @@
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">
-        <a href="#">Back to top</a>
+        <router-link to="/">Back To Top</router-link>
       </p>
     </div>
   </footer>

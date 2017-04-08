@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="ID=edge">
-    <meta name="viewport" content="width=device-width, initail-scale=1">
+    <meta name="viewport" content="width=device-width, initail-scale=1, shrink-to-fit=no">
 
     <title>GIGU SNS</title>
     <link rel="stylesheet" href="css/app.css">

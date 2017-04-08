@@ -10,19 +10,19 @@ export default {
   },
 
   get (url, successCb = null, errorCb = null) {
-    return this.request('get', url {}, successCb, errorCb)
+    return this.request('get', url, {}, successCb, errorCb)
   },
 
   post (url, data, successCb = null, errorCb = null){
-    return this.request('post', url {}, successCb, errorCb)
+    return this.request('post', url, {}, successCb, errorCb)
   },
 
   put (url, data, successCb = null, errorCb = null){
-    return this.request('post', url {}, successCb, errorCb)
+    return this.request('post', url, {}, successCb, errorCb)
   },
 
   delete (url, data = {}, successCb = null, errorCb = null){
-    return this.request('delete', url {}, successCb, errorCb)
+    return this.request('delete', url, {}, successCb, errorCb)
   },
 
   init () {

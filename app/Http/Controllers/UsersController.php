@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
   public function getUser(Request $request, $account_id){
-    return "test getuser";
+    $user = User::where("account_id",$account_id)->first();
+    return $user;
+  }
+
+  public function getAllUsers(Request $request){
+    $users = User::all();
+    return $users;
   }
 }

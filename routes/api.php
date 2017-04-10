@@ -25,6 +25,9 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('authenticate',  'AuthenticateController@authenticate');
 
 
+    Route::get('users', 'UsersController@getAllUsers');
+    Route::get('users/{account_id}', 'UsersController@getUser');
+
     Route::group(['middleware' => 'jwt.auth'], function () {
 
         Route::get('users/{account_id}', 'UsersController@getUser');

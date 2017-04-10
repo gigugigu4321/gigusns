@@ -3,8 +3,8 @@
   <section class="jumbotron text-center">
     <div class="container">
       <img src="https://placehold.jp/150x150.png" alt="Card image cap">
-      <h1 class="jumbtron-heading">ユーザーページテンプレート</h1>
-      <p class="lead text-muted">ここに説明文</p>
+      <h1 class="jumbtron-heading" v-if="user">{{user.name}}</h1>
+      <p class="lead text-muted" v-if="user">{{user.account_id}}</p>
     </div>
   </section>
   <div class="album text-muted">

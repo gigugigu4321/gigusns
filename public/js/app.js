@@ -20670,12 +20670,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_http_js__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__stores_userStore__ = __webpack_require__(61);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 
 
@@ -20694,6 +20696,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
   created: function created() {
     __WEBPACK_IMPORTED_MODULE_2__services_http_js__["a" /* default */].init();
+    __WEBPACK_IMPORTED_MODULE_3__stores_userStore__["a" /* default */].init();
   },
 
   render: function render(h) {
@@ -21727,20 +21730,20 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
     var successCb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
     var errorCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-    return this.request('post', url, {}, successCb, errorCb);
+    return this.request('post', url, data, successCb, errorCb);
   },
   put: function put(url, data) {
     var successCb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
     var errorCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-    return this.request('post', url, {}, successCb, errorCb);
+    return this.request('post', url, data, successCb, errorCb);
   },
   delete: function _delete(url) {
     var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var successCb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
     var errorCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-    return this.request('delete', url, {}, successCb, errorCb);
+    return this.request('delete', url, data, successCb, errorCb);
   },
   init: function init() {
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.defaults.baseURL = '/api';
@@ -21748,7 +21751,19 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
     __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.request.use(function (config) {
       config.headers['X-CSRF-TOKEN'] = window.Laravel.csrf_token;
       config.headers['X-Requested-With'] = 'XMLHttpRequest';
+      config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('jwt-token');
       return config;
+    });
+
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.response.use(function (response) {
+      var token = response.headers['Authorization'] || response.data['token'];
+      if (token) {
+        localStorage.setItem('jwt-token', token);
+      }
+      return response;
+    }, function (error) {
+      console.log(error);
+      return Promise.reject(error);
     });
   }
 };
@@ -47017,7 +47032,7 @@ module.exports = __webpack_require__(15);
 
 var Component = __webpack_require__(1)(
   /* script */
-  null,
+  __webpack_require__(62),
   /* template */
   __webpack_require__(60),
   /* scopeId */
@@ -47050,12 +47065,8 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "container"
-  }, [_c('form', {
-    staticClass: "form-signin"
   }, [_c('h2', {
     staticClass: "form-signin-heading"
   }, [_vm._v("Please sign up")]), _vm._v(" "), _c('label', {
@@ -47064,6 +47075,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "inputAccountID"
     }
   }, [_vm._v("アカウントID")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.account_id),
+      expression: "account_id"
+    }],
     staticClass: "form-control",
     attrs: {
       "type": "email",
@@ -47071,6 +47088,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "account ID",
       "required": "",
       "autofocus": ""
+    },
+    domProps: {
+      "value": (_vm.account_id)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.signup($event)
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.account_id = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('label', {
     staticClass: "sr-only",
@@ -47078,12 +47108,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "inputEmail"
     }
   }, [_vm._v("Email address")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.email),
+      expression: "email"
+    }],
     staticClass: "form-control",
     attrs: {
       "type": "email",
       "id": "inputEmail",
       "placeholder": "Email address",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.email)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.signup($event)
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.email = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('label', {
     staticClass: "sr-only",
@@ -47091,22 +47140,44 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "for": "inputPassword"
     }
   }, [_vm._v("Password")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.password),
+      expression: "password"
+    }],
     staticClass: "form-control",
     attrs: {
       "type": "password",
       "id": "inputPassword",
       "placeholder": "Password",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.password)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.signup($event)
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.password = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "checkbox"
-  }), _vm._v(" "), _c('button', {
+  }), _vm._v(" "), (_vm.showAlert) ? _c('div', [_vm._v("\n      " + _vm._s(_vm.alertMessage) + "\n    ")]) : _vm._e(), _vm._v(" "), _c('button', {
     staticClass: "btn btn-lg btn-primary btn-block",
     attrs: {
       "type": "submit"
+    },
+    on: {
+      "click": _vm.signup
     }
-  }, [_vm._v("Sign in")])])])
-}]}
+  }, [_vm._v("Sign up")])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -47114,6 +47185,128 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-31eaf0e8", module.exports)
   }
 }
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_http__ = __webpack_require__(39);
+
+
+/* harmony default export */ __webpack_exports__["a"] = {
+  debug: true,
+  state: {
+    user: {},
+    authenticated: false
+  },
+
+  login: function login(email, password) {
+    var _this = this;
+
+    var successCb = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+    var errorCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+    var login_param = { email: email, password: password };
+    __WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('authenticate', login_param, function (res) {
+      _this.state.user = res.data.user;
+      _this.state.authenticate = true;
+      successCb();
+    }, function (error) {
+      console.log('login failed');
+      errorCb();
+    });
+  },
+  signup: function signup(account_id, email, password) {
+    var _this2 = this;
+
+    var successCb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+    var errorCb = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+
+    var signup_param = { account_id: account_id, email: email, password: password };
+    __WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].post('signup', signup_param, function (res) {
+      _this2.state.user = res.data.user;
+      _this2.state.authencated = true;
+      successCb();
+    }, function (error) {
+      console.log(error);
+      console.log('signup failed');
+      errorCb();
+    });
+  },
+  setCurrentUser: function setCurrentUser() {
+    var _this3 = this;
+
+    var token = localStorage.getItem('jwt-token');
+    if (!token) {
+      return;
+    }
+    __WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('me', function (res) {
+      _this3.state.user = res.data.user;
+      _this3.state.authenticated = true;
+    });
+  },
+  init: function init() {
+    this.setCurrentUser();
+  }
+};
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__stores_userStore__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_http__ = __webpack_require__(39);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+  data: function data() {
+    return {
+      account_id: '',
+      email: '',
+      password: '',
+      showAlert: false,
+      alertMessage: ''
+    };
+  },
+
+  methods: {
+    signup: function signup() {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].signup(this.account_id, this.email, this.password, function (res) {
+        console.log('サインアップ成功');
+        _this.$router.push('/');
+      }, function (error) {
+        _this.showAlert = true;
+        _this.alertMessage = '多分メールアドレス重複してる';
+      });
+    }
+  }
+};
 
 /***/ })
 /******/ ]);

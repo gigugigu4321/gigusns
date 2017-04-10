@@ -14,15 +14,15 @@ export default {
   },
 
   post (url, data, successCb = null, errorCb = null){
-    return this.request('post', url, {}, successCb, errorCb)
+    return this.request('post', url, data, successCb, errorCb)
   },
 
   put (url, data, successCb = null, errorCb = null){
-    return this.request('post', url, {}, successCb, errorCb)
+    return this.request('post', url, data, successCb, errorCb)
   },
 
   delete (url, data = {}, successCb = null, errorCb = null){
-    return this.request('delete', url, {}, successCb, errorCb)
+    return this.request('delete', url, data, successCb, errorCb)
   },
 
   init () {
@@ -31,7 +31,19 @@ export default {
     axios.interceptors.request.use(config => {
       config.headers['X-CSRF-TOKEN'] = window.Laravel.csrf_token
       config.headers['X-Requested-With'] = 'XMLHttpRequest'
+      config.headers['Authorization'] = `Bearer ${localStorage.getItem('jwt-token')}`
       return config
+    })
+
+    axios.interceptors.response.use(response => {
+      const token = response.headers['Authorization'] || response.data['token']
+      if (token) {
+        localStorage.setItem('jwt-token', token)
+      }
+      return response
+    }, error => {
+      console.log(error)
+      return Promise.reject(error)
     })
   }
 }

@@ -21540,35 +21540,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 };
 
 /***/ }),
-/* 35 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = {
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-};
-
-/***/ }),
+/* 35 */,
 /* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21664,7 +21636,7 @@ __WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vue_
 
 /* harmony default export */ __webpack_exports__["a"] = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
   mode: 'history',
-  routes: [{ path: '/', component: __webpack_require__(12) }, { path: '/login', component: __webpack_require__(63) }, { path: '/signup', component: __webpack_require__(59) }, { path: '/example', component: __webpack_require__(44) }],
+  routes: [{ path: '/', component: __webpack_require__(12) }, { path: '/login', component: __webpack_require__(63) }, { path: '/signup', component: __webpack_require__(59) }, { path: '/:id', component: __webpack_require__(66) }],
   scrollBehavior: function scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
@@ -44232,40 +44204,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(1)(
-  /* script */
-  __webpack_require__(35),
-  /* template */
-  __webpack_require__(51),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/vagrant/Code/gigusns/resources/assets/js/components/Example.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-49570cca", Component.options)
-  } else {
-    hotAPI.reload("data-v-49570cca", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 44 */,
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44513,7 +44452,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "navbar-nav mr-auto"
   }, [(_vm.userState.authenticated) ? _c('li', {
     staticClass: "nav-item"
-  }, [_vm._v("\n        " + _vm._s(_vm.userState.user.name) + "\n      ")]) : _vm._e(), _vm._v(" "), (!_vm.userState.authenticated) ? _c('li', {
+  }, [_c('router-link', {
+    attrs: {
+      "to": '/' + _vm.userState.user.account_id
+    }
+  }, [_vm._v(" " + _vm._s(_vm.userState.user.name) + " ")])], 1) : _vm._e(), _vm._v(" "), (!_vm.userState.authenticated) ? _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
@@ -44565,35 +44508,7 @@ if (false) {
 }
 
 /***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-8 col-md-offset-2"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Example Component")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_vm._v("\n                    I'm an example component!\n                ")])])])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-49570cca", module.exports)
-  }
-}
-
-/***/ }),
+/* 51 */,
 /* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47398,6 +47313,287 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, function (error) {
         _this.showAlert = true;
         _this.alertMessage = 'なにかがおかしいと思う';
+      });
+    }
+  }
+};
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(68),
+  /* template */
+  __webpack_require__(67),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/vagrant/Code/gigusns/resources/assets/js/components/UserPage.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] UserPage.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2221946c", Component.options)
+  } else {
+    hotAPI.reload("data-v-2221946c", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('section', {
+    staticClass: "jumbotron text-center"
+  }, [_c('div', {
+    staticClass: "container"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('h1', {
+    staticClass: "jumbtron-heading"
+  }, [_vm._v("ユーザーページテンプレート")]), _vm._v(" "), _c('p', {
+    staticClass: "lead text-muted"
+  }, [_vm._v("ここに説明文")])])]), _vm._v(" "), _c('div', {
+    staticClass: "album text-muted"
+  }, [_c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])]), _vm._v(" "), _c('div', {
+    staticClass: "card"
+  }, [_c('img', {
+    attrs: {
+      "src": "https://placehold.jp/150x150.png",
+      "alt": "Card image cap"
+    }
+  }), _vm._v(" "), _c('p', {
+    staticClass: "card-text"
+  }, [_vm._v("test")])])])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2221946c", module.exports)
+  }
+}
+
+/***/ }),
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__services_http__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__stores_userStore__ = __webpack_require__(61);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = {
+  mounted: function mounted() {
+    this.fetchUser();
+  },
+  data: function data() {
+    return {
+      user: null,
+      userState: __WEBPACK_IMPORTED_MODULE_1__stores_userStore__["a" /* default */].state
+    };
+  },
+
+  methods: {
+    fetchUser: function fetchUser() {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('users/' + this.$route.params.id, function (res) {
+        console.log(res.data);
+        _this.user = res.data;
       });
     }
   }

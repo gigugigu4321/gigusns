@@ -24,8 +24,11 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('signup', 'AuthenticateController@signup');
     Route::post('authenticate',  'AuthenticateController@authenticate');
 
+
     Route::group(['middleware' => 'jwt.auth'], function () {
-        Route::resource('tasks',  'TaskController');
+
+        Route::get('users/{account_id}', 'UsersController@getUser');
+
         Route::get('me',  'AuthenticateController@getCurrentUser');
     });
 });

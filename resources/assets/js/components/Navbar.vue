@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" v-if="userState.authenticated">
-          {{ userState.user.name}}
+          <router-link :to="'/' + userState.user.account_id"> {{ userState.user.name}} </router-link>
         </li>
         <li class="nav-item" v-if="!userState.authenticated">
           <router-link to="/login">Login</router-link>

@@ -7,10 +7,13 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link to="/signin">Signin</router-link>
+        <li class="nav-item" v-if="userState.authenticated">
+          {{ userState.user.name}}
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="!userState.authenticated">
+          <router-link to="/login">Login</router-link>
+        </li>
+        <li class="nav-item" v-if="!userState.authenticated">
           <router-link to="/signup">Signup</router-link>
         </li>
       </ul>
@@ -22,9 +25,12 @@
   </nav>
 </template>
 <script>
+import userStore from '../stores/userStore'
 export default {
-  components: {
-    signin: require('./Signin.vue'),
+  data () {
+    return {
+      userState: userStore.state
+    }
   }
 }
 </script>

@@ -7,7 +7,7 @@ export default new VueRouter({
   mode: 'history',
   routes: [
     { path: '/'        , component: require('./components/TopPage.vue')},
-    { path: '/signin'  , component: require('./components/Signin.vue')},
+    { path: '/login'  , component: require('./components/Login.vue')},
     { path: '/signup'  , component: require('./components/Signup.vue')},
     { path: '/example' , component: require('./components/Example.vue')},
   ],

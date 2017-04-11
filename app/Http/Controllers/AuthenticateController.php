@@ -38,4 +38,6 @@ class AuthenticateController extends Controller
     $user = JWTAuth::parseToken()->authenticate();
     return response()->json(compact('user'));
   }
+
+  public function logout(){}
 }

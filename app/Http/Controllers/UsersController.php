@@ -16,4 +16,9 @@ class UsersController extends Controller
     $users = User::all();
     return $users;
   }
+
+  public function editUser(Request $request, $account_id){
+    $user = User::where("account_id",$account_id)->first();
+    return $user;
+  }
 }

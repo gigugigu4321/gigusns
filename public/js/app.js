@@ -485,6 +485,18 @@ module.exports = function normalizeComponent (
       _this3.state.authenticated = true;
     });
   },
+  logout: function logout() {
+    var _this4 = this;
+
+    var successCb = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var errorCb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+    __WEBPACK_IMPORTED_MODULE_0__services_http__["a" /* default */].get('logout', function () {
+      localStorage.removeItem('jwt-token');
+      _this4.state.authenticated = false;
+      successCb();
+    }, errorCb);
+  },
   init: function init() {
     this.setCurrentUser();
   }
@@ -21656,6 +21668,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -21665,7 +21678,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       email: '',
       password: '',
       showAlert: false,
-      alertMessage: ''
+      alertMessage: '',
+      userState: __WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].state
     };
   },
 
@@ -21674,11 +21688,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       __WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].login(this.email, this.password, function (res) {
-        console.log("ログイン成功");
-        _this.$router.push('/');
+        _this.$router.push('/' + _this.userState.user.account_id);
       }, function (error) {
         _this.showAlert = true;
-        _this.alertMessage = 'なにかがおかしいと思う';
+        _this.alertMessage = 'ログイン失敗';
       });
     }
   }
@@ -21717,6 +21730,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
@@ -21724,6 +21742,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       userState: __WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].state
     };
+  },
+
+  methods: {
+    logout: function logout() {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0__stores_userStore__["a" /* default */].logout(function () {
+        _this.$router.push('/login');
+      });
+    }
   }
 };
 
@@ -44727,7 +44755,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.login
     }
-  }, [_vm._v("ログイン")])])
+  }, [_vm._v("ログイン")]), _vm._v(" "), (_vm.showAlert) ? _c('div', [_vm._v(_vm._s(_vm.alertMessage))]) : _vm._e()])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -45091,27 +45119,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "navbarSupportedContent"
     }
-  }, [_c('ul', {
+  }, [(_vm.userState.authenticated) ? _c('ul', {
     staticClass: "navbar-nav mr-auto"
-  }, [(_vm.userState.authenticated) ? _c('li', {
+  }, [_c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
       "to": '/' + _vm.userState.user.account_id
     }
-  }, [_vm._v(" " + _vm._s(_vm.userState.user.name) + " ")])], 1) : _vm._e(), _vm._v(" "), (!_vm.userState.authenticated) ? _c('li', {
+  }, [_vm._v(" " + _vm._s(_vm.userState.user.name) + " ")])], 1), _vm._v(" "), _c('li', {
+    staticClass: "nav-item"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        _vm.logout()
+      }
+    }
+  }, [_vm._v("ログアウト")])])]) : _vm._e(), _vm._v(" "), (!_vm.userState.authenticated) ? _c('ul', {
+    staticClass: "navbar-nav mr-auto"
+  }, [_c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
       "to": "/login"
     }
-  }, [_vm._v("Login")])], 1) : _vm._e(), _vm._v(" "), (!_vm.userState.authenticated) ? _c('li', {
+  }, [_vm._v("ログイン")])], 1), _vm._v(" "), _c('li', {
     staticClass: "nav-item"
   }, [_c('router-link', {
     attrs: {
       "to": "/signup"
     }
-  }, [_vm._v("Signup")])], 1) : _vm._e()]), _vm._v(" "), _vm._m(1)])], 1)
+  }, [_vm._v("サインアップ")])], 1)]) : _vm._e(), _vm._v(" "), _vm._m(1)])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('button', {
     staticClass: "navbar-toggler navbar-toggler-right",

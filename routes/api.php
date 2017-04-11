@@ -24,14 +24,12 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('signup', 'AuthenticateController@signup');
     Route::post('authenticate',  'AuthenticateController@authenticate');
 
-
     Route::get('users', 'UsersController@getAllUsers');
     Route::get('users/{account_id}', 'UsersController@getUser');
+    Route::post('users/{account_id}', 'UsersController@editUser');
 
     Route::group(['middleware' => 'jwt.auth'], function () {
-
-        Route::get('users/{account_id}', 'UsersController@getUser');
-
+        Route::get('logout', 'AuthenticateController@logout')->middleware('jwt.refresh');
         Route::get('me',  'AuthenticateController@getCurrentUser');
     });
 });

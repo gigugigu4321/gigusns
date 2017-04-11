@@ -43,6 +43,14 @@ export default {
     })
   },
 
+  logout (successCb = null, errorCb = null){
+    http.get('logout', () => {
+      localStorage.removeItem('jwt-token')
+      this.state.authenticated = false
+      successCb()
+    }, errorCb)
+  },
+
   init () {
     this.setCurrentUser()
   }

@@ -6,15 +6,20 @@
     <router-link class="navbar-brand" to="/">TOP Page</router-link>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" v-if="userState.authenticated">
+      <ul class="navbar-nav mr-auto" v-if="userState.authenticated">
+        <li class="nav-item">
           <router-link :to="'/' + userState.user.account_id"> {{ userState.user.name}} </router-link>
         </li>
-        <li class="nav-item" v-if="!userState.authenticated">
-          <router-link to="/login">Login</router-link>
+        <li class="nav-item">
+          <a @click="logout()">ログアウト</a>
         </li>
-        <li class="nav-item" v-if="!userState.authenticated">
-          <router-link to="/signup">Signup</router-link>
+      </ul>
+      <ul class="navbar-nav mr-auto" v-if="!userState.authenticated">
+        <li class="nav-item">
+          <router-link to="/login">ログイン</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/signup">サインアップ</router-link>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -30,6 +35,13 @@ export default {
   data () {
     return {
       userState: userStore.state
+    }
+  },
+  methods: {
+    logout() {
+      userStore.logout(() => {
+        this.$router.push('/login')
+      })
     }
   }
 }

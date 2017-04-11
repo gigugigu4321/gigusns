@@ -8,6 +8,7 @@
       <div class="checkbox">
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit" @click="login">ログイン</button>
+      <div v-if="showAlert">{{alertMessage}}</div>
     </div>
 </template>
 <script>
@@ -20,16 +21,16 @@ export default {
       password: '',
       showAlert: false,
       alertMessage: '',
+      userState: userStore.state
     }
   },
   methods: {
     login () {
       userStore.login(this.email, this.password, res => {
-        console.log("ログイン成功")
-        this.$router.push('/')
+        this.$router.push('/' + this.userState.user.account_id)
       }, error => {
         this.showAlert = true
-        this.alertMessage = 'なにかがおかしいと思う'
+        this.alertMessage = 'ログイン失敗'
       })
     }
   }

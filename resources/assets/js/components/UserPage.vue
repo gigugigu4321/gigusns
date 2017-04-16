@@ -5,6 +5,25 @@
       <img src="https://placehold.jp/150x150.png" alt="Card image cap">
       <h1 class="jumbtron-heading" v-if="user">{{user.name}}</h1>
       <p class="lead text-muted" v-if="user">{{user.account_id}}</p>
+
+      <div v-if="$route.params.id === userState.user.name">
+        <form enctype="multipart/form-data" method="post" name="userform">
+          <div class="form-control-label">
+            <h3>ユーザー編集</h3>
+            <label for="name" class="form-control-label">ユーザー名</label>
+            <div>
+              <input id="name" v-if="user" type="text" class="col-md-6 form-control" :value="user.name">
+            </div>
+          </div>
+          <p>画像<input type="file" name="image" accept="image/jpeg,image/png,image/webp,image/gif"></p>
+          <div class="form-control-label">
+            <button class="btn btn-primary" @click="editUser" type="button">
+              編集
+            </button>
+          </div>
+        </form>
+      </div>
+
     </div>
   </section>
   <div class="album text-muted">
@@ -83,8 +102,14 @@ export default {
   methods: {
     fetchUser () {
       http.get('users/' + this.$route.params.id, res => {
-        console.log(res.data)
         this.user = res.data
+      })
+    },
+    editUser () {
+      const form = document.forms.namedItem('userform')
+      const formData = new window.FormData(form)
+      http.post('users/' + this.$route.params.id, formData, res => {
+        console.log(res.data)
       })
     }
   }

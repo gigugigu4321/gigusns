@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -18,6 +19,9 @@ class UsersController extends Controller
   }
 
   public function editUser(Request $request, $account_id){
+    $path = $request->image->store('images');
+    $url = Storage::url($path);
+    return $url;
     $user = User::where("account_id",$account_id)->first();
     return $user;
   }
